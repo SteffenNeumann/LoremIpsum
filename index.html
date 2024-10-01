@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lorem Ipsum Generator</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Lorem Ipsum Generator</h1>
+        <form id="loremForm" class="mt-4">
+            <div class="form-group">
+                <label for="wordCount">Anzahl der Wörter:</label>
+                <input type="number" class="form-control" id="wordCount" min="1" placeholder="Geben Sie die Anzahl der Wörter ein">
+            </div>
+            <button type="submit" class="btn btn-primary">Generieren</button>
+        </form>
+        <div class="mt-4" id="loremOutput"></div>
+    </div>
+    <!-- JavaScript -->
+    <script>
+        document.getElementById('loremForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const wordCount = document.getElementById('wordCount').value;
+            const loremText = generateLoremIpsum(wordCount);
+            document.getElementById('loremOutput').innerText = loremText;
+        });
+        function generateLoremIpsum(count) {
+            const loremWords = [
+                "Lorem", "ipsum", "dolor", "sit", "amet", "consectetur",
+                "adipiscing", "elit", "sed", "do", "eiusmod", "tempor",
+                "incididunt", "ut", "labore", "et", "dolore", "magna",
+                "aliqua", "Ut", "enim", "ad", "minim", "veniam", "quis",
+                "nostrud", "exercitation", "ullamco", "laboris", "nisi",
+                "ut", "aliquip", "ex", "ea", "commodo", "consequat"
+            ];
+            let output = [];
+            for (let i = 0; i < count; i++) {
+                const randomIndex = Math.floor(Math.random() * loremWords.length);
+                output.push(loremWords[randomIndex]);
+            }
+            return output.join(" ");
+        }
+    </script>
+</body>
+</html>
