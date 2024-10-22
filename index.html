@@ -18,6 +18,7 @@
             <button type="submit" class="btn btn-primary">Generieren</button>
         </form>
         <div class="mt-4" id="loremOutput"></div>
+        <button id="copyButton" class="btn btn-secondary mt-2" style="display: none;">Kopieren</button>
     </div>
     <!-- JavaScript -->
     <script>
@@ -25,7 +26,20 @@
             event.preventDefault();
             const wordCount = document.getElementById('wordCount').value;
             const loremText = generateLoremIpsum(wordCount);
-            document.getElementById('loremOutput').innerText = loremText;
+            const loremOutput = document.getElementById('loremOutput');
+            loremOutput.innerText = loremText;
+            document.getElementById('copyButton').style.display = 'block';
+        });
+        document.getElementById('copyButton').addEventListener('click', function() {
+            const range = document.createRange();
+            const selection = window.getSelection();
+            const loremOutput = document.getElementById('loremOutput');
+            range.selectNodeContents(loremOutput);
+            selection.removeAllRanges();
+            selection.addRange(range);
+            document.execCommand('copy');
+            selection.removeAllRanges();
+            alert('Text wurde kopiert!');
         });
         function generateLoremIpsum(count) {
             const loremWords = [
